@@ -1,4 +1,4 @@
-package com.gamingratings.gamingratings.student;
+package com.gamingratings.gamingratings.game;
 
 import java.util.UUID;
 
