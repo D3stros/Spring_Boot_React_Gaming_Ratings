@@ -18,13 +18,15 @@ public class GameController {
                         UUID.randomUUID(),
                         "Civilization 6",
                         "Strategy",
-                        10
+                        10,
+                        "https://upload.wikimedia.org/wikipedia/en/3/3b/Civilization_VI_cover_art.jpg"
                 ),
                 new Game(
                         UUID.randomUUID(),
                         "Rainbow Six Siege",
                         "Shooter",
-                        8
+                        8,
+                        "https://upload.wikimedia.org/wikipedia/en/4/47/Tom_Clancy%27s_Rainbow_Six_Siege_cover_art.jpg"
                 )
         );
     }

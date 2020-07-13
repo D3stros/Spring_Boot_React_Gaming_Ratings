@@ -8,12 +8,14 @@ public class Game {
     private final String name;
     private final String genre;
     private final int rating;
+    private final String logo;
 
-    public Game(UUID gameId, String name, String genre, int rating) {
+    public Game(UUID gameId, String name, String genre, int rating, String logo) {
         this.gameId = gameId;
         this.name = name;
         this.genre = genre;
         this.rating = rating;
+        this.logo = logo;
     }
 
     public UUID getGameId() {
@@ -28,9 +30,9 @@ public class Game {
         return genre;
     }
 
-    public int getRating() {
-        return rating;
-    }
+    public int getRating() { return rating; }
+
+    public String getLogo() { return logo; }
 }
 
 
