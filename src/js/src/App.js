@@ -51,7 +51,7 @@ class App extends Component {
           title: "Logo",
           dataIndex: "logo",
           key: "logo",
-          render: (logo) => <img alt={logo} src={logo} />,
+          render: (logo) => <img alt={logo} src={logo} className="col-lg-3" />,
         },
       ];
 
