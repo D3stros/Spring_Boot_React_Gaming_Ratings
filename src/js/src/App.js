@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { getAllGames } from "./client";
+import { Table } from "antd";
 
 class App extends Component {
   state = {
@@ -25,17 +26,36 @@ class App extends Component {
     const { games } = this.state;
 
     if (games && games.length) {
-      return games.map((games, index) => {
-        return (
-          <div key={index}>
-            <h2>{games.gameId}</h2>
-            <p>{games.name}</p>
-            <p>{games.genre}</p>
-            <p>{games.rating}</p>
-            <img src={games.logo} alt="" />
-          </div>
-        );
-      });
+      const columns = [
+        {
+          title: "GameId",
+          dataIndex: "gameId",
+          key: "gameId",
+        },
+        {
+          title: "Name",
+          dataIndex: "name",
+          key: "name",
+        },
+        {
+          title: "Genre",
+          dataIndex: "genre",
+          key: "genre",
+        },
+        {
+          title: "Rating",
+          dataIndex: "rating",
+          key: "rating",
+        },
+        {
+          title: "Logo",
+          dataIndex: "logo",
+          key: "logo",
+          render: (logo) => <img alt={logo} src={logo} />,
+        },
+      ];
+
+      return <Table dataSource={games} columns={columns} rowKey="gameId" />;
     }
 
     return <h1>No games found</h1>;
