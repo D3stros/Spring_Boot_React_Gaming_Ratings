@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import Container from "./Container";
 import "./App.css";
 import { getAllGames } from "./client";
-import { Table, Avatar } from "antd";
+import { Table, Avatar, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
+const getIndicatorIcon = () => (
+  <LoadingOutlined style={{ fontSize: 24 }} spin />
+);
 
 class App extends Component {
   state = {
     games: [],
+    isFetching: false,
   };
 
   componentDidMount() {
@@ -14,17 +20,29 @@ class App extends Component {
   }
 
   fetchGames = () => {
+    this.setState({
+      isFetching: true,
+    });
     getAllGames().then((res) =>
       res.json().then((games) => {
         console.log(games);
         this.setState({
           games,
+          isFetching: false,
         });
       })
     );
   };
   render() {
-    const { games } = this.state;
+    const { games, isFetching } = this.state;
+
+    if (isFetching) {
+      return (
+        <Container>
+          <Spin indicator={getIndicatorIcon()} />
+        </Container>
+      );
+    }
 
     if (games && games.length) {
       const columns = [
