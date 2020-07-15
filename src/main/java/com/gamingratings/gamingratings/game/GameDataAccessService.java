@@ -1,5 +1,7 @@
 package com.gamingratings.gamingratings.game;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,22 +10,18 @@ import java.util.UUID;
 @Repository
 public class GameDataAccessService {
 
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public GameDataAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<Game> selectAllGames() {
-        return List.of(
-                new Game(
-                        UUID.randomUUID(),
-                        "Civilization 6",
-                        "Strategy",
-                        10,
-                        "https://upload.wikimedia.org/wikipedia/en/3/3b/Civilization_VI_cover_art.jpg"
-                ),
-                new Game(
-                        UUID.randomUUID(),
-                        "Rainbow Six Siege",
-                        "Shooter",
-                        8,
-                        "https://upload.wikimedia.org/wikipedia/en/4/47/Tom_Clancy%27s_Rainbow_Six_Siege_cover_art.jpg"
-                )
-        );
+        String sql = "";
+        List<Game> games = jdbcTemplate.query(sql, (resultSet, i) -> {
+            return null;
+        });
+    return null;
     }
 }
