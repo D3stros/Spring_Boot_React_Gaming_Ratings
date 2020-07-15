@@ -3,7 +3,7 @@ import Container from "./Container";
 import Footer from "./Footer";
 import "./App.css";
 import { getAllGames } from "./client";
-import { Table, Avatar, Spin } from "antd";
+import { Table, Avatar, Spin, Modal } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const getIndicatorIcon = () => (
@@ -14,11 +14,16 @@ class App extends Component {
   state = {
     games: [],
     isFetching: false,
+    isAddGameModalVisible: false,
   };
 
   componentDidMount() {
     this.fetchGames();
   }
+
+  openAddGameModal = () => this.setState({ isAddGameModalVisible: true });
+
+  closeAddGameModal = () => this.setState({ isAddGameModalVisible: false });
 
   fetchGames = () => {
     this.setState({
@@ -35,7 +40,7 @@ class App extends Component {
     );
   };
   render() {
-    const { games, isFetching } = this.state;
+    const { games, isFetching, isAddGameModalVisible } = this.state;
 
     if (isFetching) {
       return (
@@ -83,7 +88,19 @@ class App extends Component {
             pagination={false}
             rowKey="gameId"
           />
-          <Footer numberOfGames={games.length}></Footer>
+          <Modal
+            title="Add new game"
+            visible={isAddGameModalVisible}
+            onOk={this.closeAddGameModal}
+            onCancel={this.closeAddGameModal}
+            width={1000}
+          >
+            <h1>Hello Modal with Antd</h1>
+          </Modal>
+          <Footer
+            numberOfGames={games.length}
+            handleAddGameClickEvent={this.openAddGameModal}
+          ></Footer>
         </Container>
       );
     }

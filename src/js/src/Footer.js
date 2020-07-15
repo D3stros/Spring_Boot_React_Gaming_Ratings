@@ -14,7 +14,9 @@ const Footer = (props) => (
           {props.numberOfGames}
         </Avatar>
       ) : null}
-      <Button type="primary">Add new Game +</Button>
+      <Button onClick={() => props.handleAddGameClickEvent()} type="primary">
+        Add new Game +
+      </Button>
     </Container>
   </div>
 );
