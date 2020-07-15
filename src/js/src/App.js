@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Container from "./Container";
+import Footer from "./Footer";
 import "./App.css";
 import { getAllGames } from "./client";
 import { Table, Avatar, Spin } from "antd";
@@ -82,6 +83,7 @@ class App extends Component {
             pagination={false}
             rowKey="gameId"
           />
+          <Footer numberOfGames={games.length}></Footer>
         </Container>
       );
     }
