@@ -2,6 +2,7 @@ package com.gamingratings.gamingratings.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,18 +18,34 @@ public class GameDataAccessService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Game> selectAllGames() {
+    List<Game> selectAllGames() {
         String sql = "" +
-                "SELECT" +
+                "SELECT " +
                 "game_id," +
                 "name," +
                 "genre," +
-                "rating" +
-                "logo" +
+                "rating," +
+                "logo " +
                 "FROM game";
-        List<Game> games = jdbcTemplate.query(sql, (resultSet, i) -> {
-            return null;
-        });
-    return null;
+       return jdbcTemplate.query(sql, mapGameFromDb());
+    }
+
+    private RowMapper<Game> mapGameFromDb() {
+        return (resultSet, i) -> {
+             String gameIdStr = resultSet.getString("game_id");
+             UUID gameId = UUID.fromString(gameIdStr);
+
+             String name = resultSet.getString("name");
+             String genre = resultSet.getString("genre");
+             Integer rating = resultSet.getInt("rating");
+             String logo = resultSet.getString("logo");
+             return new Game(
+                     gameId,
+                     name,
+                     genre,
+                     rating,
+                     logo
+             );
+         };
     }
 }
