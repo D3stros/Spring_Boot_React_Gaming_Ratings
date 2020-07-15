@@ -5,6 +5,7 @@ import "./App.css";
 import { getAllGames } from "./client";
 import { Table, Avatar, Spin, Modal } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import AddGameForm from "./forms/AddGameForm";
 
 const getIndicatorIcon = () => (
   <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -96,6 +97,7 @@ class App extends Component {
             width={1000}
           >
             <h1>Hello Modal with Antd</h1>
+            <AddGameForm />
           </Modal>
           <Footer
             numberOfGames={games.length}
