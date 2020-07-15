@@ -18,7 +18,14 @@ public class GameDataAccessService {
     }
 
     public List<Game> selectAllGames() {
-        String sql = "";
+        String sql = "" +
+                "SELECT" +
+                "game_id," +
+                "name," +
+                "genre," +
+                "rating" +
+                "logo" +
+                "FROM game";
         List<Game> games = jdbcTemplate.query(sql, (resultSet, i) -> {
             return null;
         });
