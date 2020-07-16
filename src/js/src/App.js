@@ -96,7 +96,6 @@ class App extends Component {
             onCancel={this.closeAddGameModal}
             width={1000}
           >
-            <h1>Hello Modal with Antd</h1>
             <AddGameForm />
           </Modal>
           <Footer
