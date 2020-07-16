@@ -8,16 +8,30 @@ class AddGameForm extends Component {
   render() {
     return (
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", genre: "", rating: "", logo: "" }}
         validate={(values) => {
           const errors = {};
 
-          if (!values.email) {
-            errors.email = "Required";
+          if (!values.name) {
+            errors.name = "Name of game is required";
+          }
+
+          if (!values.genre) {
+            errors.genre = "Genre of game is required";
+          }
+
+          if (!values.rating) {
+            errors.rating = "Rating of game is required";
           } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            !["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].includes(
+              values.rating
+            )
           ) {
-            errors.email = "Invalid email address";
+            errors.rating = "Rating must be between 1 and 10";
+          }
+
+          if (!values.logo) {
+            errors.logo = "Logo of game is required";
           }
 
           return errors;
