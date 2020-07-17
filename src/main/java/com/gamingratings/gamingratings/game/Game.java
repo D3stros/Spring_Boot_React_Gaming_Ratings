@@ -1,5 +1,7 @@
 package com.gamingratings.gamingratings.game;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Game {
@@ -10,7 +12,11 @@ public class Game {
     private final int rating;
     private final String logo;
 
-    public Game(UUID gameId, String name, String genre, int rating, String logo) {
+    public Game(@JsonProperty("gameId") UUID gameId,
+                @JsonProperty("name") String name,
+                @JsonProperty("genre") String genre,
+                @JsonProperty("rating") int rating,
+                @JsonProperty("logo") String logo) {
         this.gameId = gameId;
         this.name = name;
         this.genre = genre;
@@ -33,6 +39,17 @@ public class Game {
     public int getRating() { return rating; }
 
     public String getLogo() { return logo; }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameId=" + gameId +
+                ", name='" + name + '\'' +
+                ", genre='" + genre + '\'' +
+                ", rating=" + rating +
+                ", logo='" + logo + '\'' +
+                '}';
+    }
 }
 
 
