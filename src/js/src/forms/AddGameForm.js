@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-import { Input, Button } from "antd";
+import { Input, Button, Tag } from "antd";
 
 const inputBottomMargin = { marginBottom: "10px" };
+const tagStyle = {
+  backgroundColor: "red",
+  color: "white",
+  ...inputBottomMargin,
+};
 
 class AddGameForm extends Component {
   render() {
@@ -71,7 +76,9 @@ class AddGameForm extends Component {
               placeholder="Title of the game"
             />
 
-            {errors.name && touched.name && errors.name}
+            {errors.name && touched.name && (
+              <Tag style={tagStyle}>{errors.name}</Tag>
+            )}
 
             <Input
               style={inputBottomMargin}
@@ -82,7 +89,9 @@ class AddGameForm extends Component {
               placeholder="Genre of the game"
             />
 
-            {errors.genre && touched.genre && errors.genre}
+            {errors.genre && touched.genre && (
+              <Tag style={tagStyle}>{errors.genre}</Tag>
+            )}
 
             <Input
               style={inputBottomMargin}
@@ -93,7 +102,9 @@ class AddGameForm extends Component {
               placeholder="Rating of the game (10=Amazing-1=Bad)"
             />
 
-            {errors.rating && touched.rating && errors.rating}
+            {errors.rating && touched.rating && (
+              <Tag style={tagStyle}>{errors.rating}</Tag>
+            )}
 
             <Input
               style={inputBottomMargin}
@@ -104,7 +115,9 @@ class AddGameForm extends Component {
               placeholder="Link to game logo"
             />
 
-            {errors.logo && touched.logo && errors.logo}
+            {errors.logo && touched.logo && (
+              <Tag style={tagStyle}>{errors.logo}</Tag>
+            )}
 
             <Button type="submit" disabled={isSubmitting}>
               Submit

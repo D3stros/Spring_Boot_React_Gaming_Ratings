@@ -15,7 +15,7 @@ const Footer = (props) => (
         </Avatar>
       ) : null}
       <Button onClick={() => props.handleAddGameClickEvent()} type="primary">
-        Add new Game +
+        Add new Game
       </Button>
     </Container>
   </div>
