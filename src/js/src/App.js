@@ -84,6 +84,7 @@ class App extends Component {
       return (
         <Container>
           <Table
+            style={{ marginBottom: "10%" }}
             dataSource={games}
             columns={columns}
             pagination={false}
@@ -96,7 +97,12 @@ class App extends Component {
             onCancel={this.closeAddGameModal}
             width={1000}
           >
-            <AddGameForm />
+            <AddGameForm
+              onSuccess={() => {
+                this.closeAddGameModal();
+                this.fetchGames();
+              }}
+            />
           </Modal>
           <Footer
             numberOfGames={games.length}

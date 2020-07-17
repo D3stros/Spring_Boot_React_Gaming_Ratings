@@ -27,25 +27,32 @@ public class GameDataAccessService {
                 "rating," +
                 "logo " +
                 "FROM game";
-       return jdbcTemplate.query(sql, mapGameFromDb());
+        return jdbcTemplate.query(sql, mapGameFromDb());
+    }
+
+    int insertGame(UUID gameId, Game game) {
+        String sql = "" +
+                "INSERT INTO game (game_id, name, genre, rating, logo) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, gameId, game.getName(), game.getGenre(), game.getRating(), game.getLogo());
     }
 
     private RowMapper<Game> mapGameFromDb() {
         return (resultSet, i) -> {
-             String gameIdStr = resultSet.getString("game_id");
-             UUID gameId = UUID.fromString(gameIdStr);
+            String gameIdStr = resultSet.getString("game_id");
+            UUID gameId = UUID.fromString(gameIdStr);
 
-             String name = resultSet.getString("name");
-             String genre = resultSet.getString("genre");
-             Integer rating = resultSet.getInt("rating");
-             String logo = resultSet.getString("logo");
-             return new Game(
-                     gameId,
-                     name,
-                     genre,
-                     rating,
-                     logo
-             );
-         };
+            String name = resultSet.getString("name");
+            String genre = resultSet.getString("genre");
+            Integer rating = resultSet.getInt("rating");
+            String logo = resultSet.getString("logo");
+            return new Game(
+                    gameId,
+                    name,
+                    genre,
+                    rating,
+                    logo
+            );
+        };
     }
 }

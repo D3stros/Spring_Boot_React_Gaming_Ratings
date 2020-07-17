@@ -36,9 +36,13 @@ public class Game {
         return genre;
     }
 
-    public int getRating() { return rating; }
+    public int getRating() {
+        return rating;
+    }
 
-    public String getLogo() { return logo; }
+    public String getLogo() {
+        return logo;
+    }
 
     @Override
     public String toString() {

@@ -24,6 +24,6 @@ public class GameController {
 
     @PostMapping
     public void addNewGame(@RequestBody Game game) {
-        System.out.println(game);
+        gameService.addNewGame(game);
     }
 }
