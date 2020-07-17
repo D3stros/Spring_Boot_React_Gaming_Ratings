@@ -64,6 +64,10 @@ class AddGameForm extends Component {
 
           isSubmitting,
 
+          submitForm,
+
+          isValid,
+
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
@@ -119,7 +123,11 @@ class AddGameForm extends Component {
               <Tag style={tagStyle}>{errors.logo}</Tag>
             )}
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button
+              onClick={() => submitForm()}
+              type="submit"
+              disabled={isSubmitting || (touched && !isValid)}
+            >
               Submit
             </Button>
           </form>
