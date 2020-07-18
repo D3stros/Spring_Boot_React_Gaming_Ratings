@@ -3,9 +3,10 @@ import Container from "./Container";
 import Footer from "./Footer";
 import "./App.css";
 import { getAllGames } from "./client";
-import { Table, Avatar, Spin, Modal } from "antd";
+import { Table, Avatar, Spin, Modal, Empty } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import AddGameForm from "./forms/AddGameForm";
+import { errorNotification } from "./Notification";
 
 const getIndicatorIcon = () => (
   <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -30,18 +31,50 @@ class App extends Component {
     this.setState({
       isFetching: true,
     });
-    getAllGames().then((res) =>
-      res.json().then((games) => {
-        console.log(games);
+    getAllGames()
+      .then((res) =>
+        res.json().then((games) => {
+          console.log(games);
+          this.setState({
+            games,
+            isFetching: false,
+          });
+        })
+      )
+      .catch((error) => {
+        const message = error.error.message;
+        const description = error.error.error;
+        errorNotification(message, description);
         this.setState({
-          games,
           isFetching: false,
         });
-      })
-    );
+      });
   };
   render() {
     const { games, isFetching, isAddGameModalVisible } = this.state;
+
+    const commonElements = () => (
+      <div>
+        <Modal
+          title="Add new game"
+          visible={isAddGameModalVisible}
+          onOk={this.closeAddGameModal}
+          onCancel={this.closeAddGameModal}
+          width={1000}
+        >
+          <AddGameForm
+            onSuccess={() => {
+              this.closeAddGameModal();
+              this.fetchGames();
+            }}
+          />
+        </Modal>
+        <Footer
+          numberOfGames={games.length}
+          handleAddGameClickEvent={this.openAddGameModal}
+        ></Footer>
+      </div>
+    );
 
     if (isFetching) {
       return (
@@ -82,7 +115,7 @@ class App extends Component {
       ];
 
       return (
-        <Container>
+        <Container id="test">
           <Table
             style={{ marginBottom: "10%" }}
             dataSource={games}
@@ -90,29 +123,17 @@ class App extends Component {
             pagination={false}
             rowKey="gameId"
           />
-          <Modal
-            title="Add new game"
-            visible={isAddGameModalVisible}
-            onOk={this.closeAddGameModal}
-            onCancel={this.closeAddGameModal}
-            width={1000}
-          >
-            <AddGameForm
-              onSuccess={() => {
-                this.closeAddGameModal();
-                this.fetchGames();
-              }}
-            />
-          </Modal>
-          <Footer
-            numberOfGames={games.length}
-            handleAddGameClickEvent={this.openAddGameModal}
-          ></Footer>
+          {commonElements()}
         </Container>
       );
     }
 
-    return <h1>No games found</h1>;
+    return (
+      <Container>
+        <Empty description={"No Games found"} />
+        {commonElements()}
+      </Container>
+    );
   }
 }
 

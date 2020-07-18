@@ -19,7 +19,8 @@ public class GameController {
 
     @GetMapping
     public List<Game> getAllGames() {
-    return gameService.getAllGames();
+        throw new IllegalStateException("No games found");
+    // return gameService.getAllGames();
     }
 
     @PostMapping
