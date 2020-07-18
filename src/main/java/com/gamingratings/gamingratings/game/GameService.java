@@ -33,7 +33,7 @@ public class GameService {
     void addNewGame(UUID gameId, Game game) {
         UUID newGameId = Optional.ofNullable(gameId).orElse(UUID.randomUUID());
         if(!linkValidator.test(game.getLogo())) {
-            throw new ApiRequestException(game.getLogo() + "is not a valid link");
+            throw new ApiRequestException(game.getLogo() + " is not a valid link");
         }
         gameDataAccessService.insertGame(newGameId, game);
     }

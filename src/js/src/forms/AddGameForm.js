@@ -41,10 +41,16 @@ const AddGameForm = (props) => (
       return errors;
     }}
     onSubmit={(game, { setSubmitting }) => {
-      addNewGame(game).then(() => {
-        props.onSuccess();
-        setSubmitting(false);
-      });
+      addNewGame(game)
+        .then(() => {
+          props.onSuccess();
+        })
+        .catch((err) => {
+          props.onFailure(err);
+        })
+        .finally(() => {
+          setSubmitting(false);
+        });
     }}
   >
     {({
