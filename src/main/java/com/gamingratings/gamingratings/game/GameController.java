@@ -1,8 +1,10 @@
 package com.gamingratings.gamingratings.game;
 
+import com.gamingratings.gamingratings.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,12 +21,11 @@ public class GameController {
 
     @GetMapping
     public List<Game> getAllGames() {
-        throw new IllegalStateException("No games found");
-    // return gameService.getAllGames();
+    return gameService.getAllGames();
     }
 
     @PostMapping
-    public void addNewGame(@RequestBody Game game) {
+    public void addNewGame(@RequestBody @Valid Game game) {
         gameService.addNewGame(game);
     }
 }

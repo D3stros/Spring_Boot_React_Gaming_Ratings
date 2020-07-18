@@ -1,15 +1,21 @@
 package com.gamingratings.gamingratings.game;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class Game {
 
     private final UUID gameId;
+    @NotBlank
     private final String name;
+    @NotBlank
     private final String genre;
+    @NotNull
     private final int rating;
+    @NotBlank
     private final String logo;
 
     public Game(@JsonProperty("gameId") UUID gameId,
