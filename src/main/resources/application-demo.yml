@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+
+server:
+  port: 5000
+
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://gamingratingdb.cf383bc8sq81.eu-central-1.rds.amazonaws.com:5432/gamingratingdb
+    username: postgres
+    password: z7T3atwahTRj4aC
+    pool-size: 30
