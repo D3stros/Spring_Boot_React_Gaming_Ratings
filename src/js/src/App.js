@@ -98,11 +98,6 @@ class App extends Component {
           render: (logo) => <Avatar src={logo} size={100} />,
         },
         {
-          title: "GameId",
-          dataIndex: "gameId",
-          key: "gameId",
-        },
-        {
           title: "Name",
           dataIndex: "name",
           key: "name",
